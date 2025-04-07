@@ -4,7 +4,7 @@
 
 ## 🔗 Official Website
 
-Visit the website at [barbometro.pt](https://barbometro.pt).
+Visit the website at [barbometro.onrender.com](https://barbometro.onrender.com).
 
 ## ✨ Features
 
