@@ -71,7 +71,7 @@ export function SearchFilters({
 
   const handleSortChange = (value: string) => {
     setSelectedSort(value)
-    onSortChange(value)
+    onSortChange(value) // Pass the selected sort option to the parent component
   }
 
   return (
@@ -283,4 +283,3 @@ export function SearchFilters({
     </Card>
   )
 }
-

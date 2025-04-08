@@ -8,8 +8,10 @@ export interface Restaurant {
   visitado: boolean // Visited flag
   rating: number // Overall rating
   precoPorPessoa: string // Price per person without drinks
-  paginaOuInstagram?: string // Website or Instagram URL
-  ratingBarbudo?: number // Custom rating by the bearded reviewer
+  paginaOuInstagram: string // Website or Instagram URL
+  ratingBarbudo: number // Custom rating by the bearded reviewer
+  ratingServico: number // Service rating
+  ratioQualidadePreco: number // Quality-price ratio
   notasOuSugestoes?: string // Additional notes or suggestions
   latitude: number // Latitude for map marker
   longitude: number // Longitude for map marker
