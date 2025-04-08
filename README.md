@@ -61,7 +61,7 @@ Access the website locally at [http://localhost:3000](http://localhost:3000).
 
 ## 🎯 Roadmap
 
-Soon available at a Notion Page.
+Backlog/Roadmap available [here](https://accessible-quark-afa.notion.site/Features-List-Backlog-1c9da828e1e980b08482fabce90d0ef5). Still early days so be mindful ❤️
 
 ## 🤝 Contribution
 
