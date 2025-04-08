@@ -1,6 +1,6 @@
 "use client"
 
-import type React from "react"
+import React, { useState, useEffect } from "react";
 
 import { Star, MapPin, ExternalLink, Check, Clock, ChevronDown, ChevronUp } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
@@ -9,7 +9,6 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { Button } from "@/components/ui/button"
 import type { Restaurant } from "@/types/restaurant"
 import { cn } from "@/lib/utils"
-import { useState } from "react"
 import { useMobile } from "@/hooks/use-mobile"
 
 interface RestaurantListProps {
@@ -17,15 +16,18 @@ interface RestaurantListProps {
   isLoading: boolean
   onSelectRestaurant: (restaurant: Restaurant) => void
   selectedRestaurant: Restaurant | null
+  sortOption: string
 }
 
 export function RestaurantList({
-  restaurants,
+  restaurants : initialRestaurants,
   isLoading,
   onSelectRestaurant,
   selectedRestaurant,
+  sortOption,
 }: RestaurantListProps) {
   const isMobile = useMobile()
+  const [restaurants, setRestaurants] = useState(initialRestaurants);
 
   // Helper function to format price
   const formatPrice = (price: string) => {
@@ -39,6 +41,29 @@ export function RestaurantList({
   const formatRating = (rating: number) => {
     return rating.toFixed(1)
   }
+
+  useEffect(() => {
+    // Sort restaurants based on the selected sort option
+    let sortedRestaurants = [...initialRestaurants];
+
+    switch (sortOption) {
+      case "rating":
+        sortedRestaurants.sort((a, b) => b.ratingBarbudo - a.ratingBarbudo);
+        break;
+      case "price-asc":
+        sortedRestaurants.sort((a, b) => parseFloat(a.precoPorPessoa) - parseFloat(b.precoPorPessoa));
+        break;
+      case "price-desc":
+        sortedRestaurants.sort((a, b) => parseFloat(b.precoPorPessoa) - parseFloat(a.precoPorPessoa));
+        break;
+      case "name":
+      default:
+        sortedRestaurants.sort((a, b) => a.nome.localeCompare(b.nome));
+        break;
+    }
+
+    setRestaurants(sortedRestaurants);
+  }, [sortOption, initialRestaurants]);
 
   const [expandedNotes, setExpandedNotes] = useState<number[]>([])
 
@@ -136,11 +161,12 @@ export function RestaurantList({
               ))}
             </div>
 
-            {/* Price per person */}
+            {/* Price per person if available*/}
+            {restaurant.ratingBarbudo > 0 && (
             <div className="mt-2 text-sm flex items-center">
               <span className="font-medium mr-2">Preço por pessoa: </span>
               <span className="text-muted-foreground text-sm">{formatPrice(restaurant.precoPorPessoa)}</span>
-            </div>
+            </div>)}
 
             {/* rating if available */}
             {restaurant.rating > 0 && (
@@ -160,6 +186,17 @@ export function RestaurantList({
                 <div className="flex">
                   <Star className="w-4 h-4 mr-1 fill-primary" />
                   {formatRating(restaurant.ratioQualidadePreco)}
+                </div>
+              </div>
+            )}
+
+            {/* rating PQ if available */}
+            {restaurant.ratingServico > 0 && (
+              <div className="mt-2 text-sm flex items-center">
+                <span className="font-medium mr-2">Serviço:</span>
+                <div className="flex">
+                  <Star className="w-4 h-4 mr-1 fill-primary" />
+                  {formatRating(restaurant.ratingServico)}
                 </div>
               </div>
             )}
@@ -234,4 +271,3 @@ export function RestaurantList({
     </div>
   )
 }
-

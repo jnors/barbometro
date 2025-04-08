@@ -53,7 +53,7 @@ async function fetchWithSheetsAPI(): Promise<Restaurant[]> {
 
   // Use the v4 API with proper formatting
   const response = await fetch(
-    `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Lista!A:N?key=${apiKey}`,
+    `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Lista!A:O?key=${apiKey}`,
     {
       headers: {
         Accept: "application/json",
@@ -73,7 +73,6 @@ async function fetchWithSheetsAPI(): Promise<Restaurant[]> {
   }
 
   const processedData = processSheetData(data)
-
   // Sort restaurants alphabetically by name
   return processedData.sort((a, b) => a.nome.localeCompare(b.nome, "pt"))
 }
@@ -119,12 +118,13 @@ function parseCSV(csvText: string): Restaurant[] {
       visitado: columns[5]?.toLowerCase() === "sim" || columns[5] === "1" || columns[5]?.toLowerCase() === "true",
       rating: Number.parseFloat(columns[6].replace(",", ".")) || 0,
       ratioQualidadePreco: Number.parseFloat(columns[7].replace(",", ".")) || 0,
-      precoPorPessoa: columns[8] || "",
-      paginaOuInstagram: columns[9] || "",
-      ratingBarbudo: Number.parseFloat(columns[10].replace(",", ".")) || 0,
-      notasOuSugestoes: columns[11] || "",
-      latitude: Number.parseFloat(columns[12]) || 0,
-      longitude: Number.parseFloat(columns[13]) || 0,
+      ratingServico: Number.parseFloat(columns[8].replace(",", ".")) || 0,
+      precoPorPessoa: columns[9] || "",
+      paginaOuInstagram: columns[10] || "",
+      ratingBarbudo: Number.parseFloat(columns[11].replace(",", ".")) || 0,
+      notasOuSugestoes: columns[12] || "",
+      latitude: Number.parseFloat(columns[13]) || 0,
+      longitude: Number.parseFloat(columns[14]) || 0,
     }
   })
 }
@@ -150,12 +150,13 @@ function processSheetData(data: any): Restaurant[] {
       row[5] === true,
     rating: Number.parseFloat(row[6].replace(",", ".")) || 0,
     ratioQualidadePreco: Number.parseFloat(row[7].replace(",", ".")) || 0,
-    precoPorPessoa: row[8] || "",
-    paginaOuInstagram: row[9] || "",
-    ratingBarbudo: Number.parseFloat(row[10].replace(",", ".")) || 0,
-    notasOuSugestoes: row[11] || "",
-    latitude: Number.parseFloat(row[12]) || 0,
-    longitude: Number.parseFloat(row[13]) || 0,
+    ratingServico: Number.parseFloat(row[8].replace(",", ".")) || 0,
+    precoPorPessoa: row[9] || "",
+    paginaOuInstagram: row[10] || "",
+    ratingBarbudo: Number.parseFloat(row[11].replace(",", ".")) || 0,
+    notasOuSugestoes: row[12] || "",
+    latitude: Number.parseFloat(row[13]) || 0,
+    longitude: Number.parseFloat(row[14]) || 0,
   }))
 }
 
@@ -177,6 +178,8 @@ function getMockRestaurants(): Restaurant[] {
       notasOuSugestoes: "Experimentar o bacalhau à brás",
       latitude: 41.1494512,
       longitude: -8.6107884,
+      ratingServico: 4,
+      ratioQualidadePreco: 4
     },
     {
       id: 2,
@@ -193,6 +196,8 @@ function getMockRestaurants(): Restaurant[] {
       notasOuSugestoes: "Reservar com antecedência",
       latitude: 38.7097643,
       longitude: -9.1397026,
+      ratingServico: 4,
+      ratioQualidadePreco: 4
     },
     {
       id: 3,
@@ -209,6 +214,8 @@ function getMockRestaurants(): Restaurant[] {
       notasOuSugestoes: "Recomendado por amigos",
       latitude: 41.5454486,
       longitude: -8.426507,
+      ratingServico: 4,
+      ratioQualidadePreco: 4
     },
     {
       id: 4,
@@ -225,6 +232,8 @@ function getMockRestaurants(): Restaurant[] {
       notasOuSugestoes: "Excelente relação qualidade/preço",
       latitude: 38.7223252,
       longitude: -9.1393295,
+      ratingServico: 4,
+      ratioQualidadePreco: 4
     },
     {
       id: 5,
@@ -241,6 +250,8 @@ function getMockRestaurants(): Restaurant[] {
       notasOuSugestoes: "Ótimos pratos de peixe fresco",
       latitude: 37.0146099,
       longitude: -7.9330933,
+      ratingServico: 4,
+      ratioQualidadePreco: 4
     },
     {
       id: 6,
@@ -253,10 +264,12 @@ function getMockRestaurants(): Restaurant[] {
       rating: 4.4,
       precoPorPessoa: "18€",
       paginaOuInstagram: "https://veggiedelight.pt",
-      ratingBarbudo: 0,
       notasOuSugestoes: "Boas opções vegan",
       latitude: 40.2109801,
       longitude: -8.4292057,
+      ratingBarbudo: 4,
+      ratingServico: 4,
+      ratioQualidadePreco: 4
     },
   ]
 

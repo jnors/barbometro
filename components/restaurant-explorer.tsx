@@ -42,7 +42,6 @@ export function RestaurantExplorer() {
   const [barbudoRatingFilter, setBarbudoRatingFilter] = useState<number | null>(null)
   const [mapError, setMapError] = useState<boolean>(false)
   const [mobileView, setMobileView] = useState<"map" | "list">("list") // Default to list view on mobile
-  // Add a new state for the sort option
   const [sortOption, setSortOption] = useState<string>("name")
 
   const isMobile = useMobile()
@@ -148,7 +147,7 @@ export function RestaurantExplorer() {
     if (sortOption === "name") {
       results = sortRestaurantsByName(results)
     } else if (sortOption === "rating") {
-      results = [...results].sort((a, b) => b.rating - a.rating)
+      results = [...results].sort((a, b) => b.ratingBarbudo - a.ratingBarbudo)
     } else if (sortOption === "price-asc") {
       results = [...results].sort((a, b) => extractPrice(a.precoPorPessoa) - extractPrice(b.precoPorPessoa))
     } else if (sortOption === "price-desc") {
@@ -257,6 +256,7 @@ export function RestaurantExplorer() {
             isLoading={isLoading}
             onSelectRestaurant={handleRestaurantSelect}
             selectedRestaurant={selectedRestaurant}
+            sortOption={sortOption} // Pass sortOption as a prop
           />
         </div>
 
