@@ -21,6 +21,11 @@ export function Navbar() {
       isExternal: true,
     },
     {
+      label: "Sugestões",
+      href: "https://tally.so/r/meo5XQ",
+      isExternal: true,
+    },
+    {
       label: "Contacto",
       href: "mailto:joaonorsilva92@gmail.com",
       isExternal: true,
