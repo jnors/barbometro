@@ -16,6 +16,11 @@ export function Navbar() {
     { label: "Home", href: "/" },
     { label: "Sobre", href: "/sobre" },
     {
+      label: "Feedback/Bug",
+      href: "https://tally.so/r/walOJW",
+      isExternal: true,
+    },
+    {
       label: "Contacto",
       href: "mailto:joaonorsilva92@gmail.com",
       isExternal: true,
