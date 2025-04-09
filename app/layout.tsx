@@ -27,6 +27,7 @@ export default function RootLayout({
   return (
     <html lang="pt">
       <head>
+        
         {/* MailerLite Universal Script */}
         <Script id="mailerlite-universal" strategy="afterInteractive">
           {`
@@ -35,6 +36,20 @@ export default function RootLayout({
             n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
             (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
             ml('account', '1425868');
+          `}
+        </Script>
+
+        {/* Google Analytics Script */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=G-2L8TWSVHWK`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-2L8TWSVHWK');
           `}
         </Script>
       </head>
