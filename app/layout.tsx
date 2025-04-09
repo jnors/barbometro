@@ -16,7 +16,21 @@ export const metadata: Metadata = {
     icon: [{ url: "/images/Barbometro_icon.png", type: "image/png" }],
     apple: [{ url: "/images/Barbometro_icon.png" }],
   },
-    generator: 'v0.dev'
+  openGraph: {
+    title: 'Barbómetro – Encontra os melhores restaurantes',
+    description: 'Restaurantes escolhidos cuidadosamente em Portugal.',
+    url: 'https://barbometro.onrender.com',
+    siteName: 'Barbómetro',
+    images: [
+      {
+        url: 'https://barbometro.onrender.com/your-image.png',
+        width: 800,
+        height: 600,
+      },
+    ],
+    locale: 'pt_PT',
+    type: 'website',
+  },
 }
 
 export default function RootLayout({

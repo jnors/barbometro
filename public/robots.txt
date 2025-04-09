@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://barbometro.onrender.com/sitemap.xml
