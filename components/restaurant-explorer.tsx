@@ -211,6 +211,16 @@ export function RestaurantExplorer() {
     setMobileView(view)
   }
 
+  // Extract and sort unique locations alphabetically
+  const sortedLocations = Array.from(
+    new Set(restaurants.map((r) => r.localidade))
+  ).sort((a, b) => a.localeCompare(b, "pt"));
+
+  // Extract and sort unique cuisines alphabetically
+  const sortedCuisines = Array.from(
+    new Set(restaurants.flatMap((r) => r.tipoCozinha.split(",").map((cuisine) => cuisine.trim())))
+  ).sort((a, b) => a.localeCompare(b, "pt"));
+
   return (
     <section className="container px-4 py-8 mx-auto">
       {error && (
@@ -234,10 +244,8 @@ export function RestaurantExplorer() {
         onPriceFilter={handlePriceFilter}
         onBarbudoRatingFilter={handleBarbudoRatingFilter}
         onSortChange={handleSortChange}
-        locations={Array.from(new Set(restaurants.map((r) => r.localidade)))}
-        cuisines={Array.from(
-          new Set(restaurants.flatMap((r) => r.tipoCozinha.split(",").map((cuisine) => cuisine.trim()))),
-        )}
+        locations={sortedLocations}
+        cuisines={sortedCuisines}
       />
 
       {/* Mobile View Toggle */}
