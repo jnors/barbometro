@@ -7,7 +7,7 @@ export function Footer() {
         <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
           © {new Date().getFullYear()} Barbómetro. Todos os direitos reservados.
         </p>
-        <BuyMeCoffee username="barbudodev" variant="ghost" size="sm" />
+        <BuyMeCoffee variant="ghost" size="sm" />
       </div>
     </footer>
   )

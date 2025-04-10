@@ -21,7 +21,7 @@ export function Hero() {
           </h1>
 
           <p className="text-lg mb-8 max-w-2xl text-[#334155]">
-            Descobre restaurantes autênticos por toda a Europa, filtrados por localidade e tipo de cozinha.
+            Descobre restaurantes autênticos pelo mundo fora, filtrados por localidade, tipo de cozinha e preço.
           </p>
         </div>
       </div>

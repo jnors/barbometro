@@ -16,16 +16,18 @@ export default function SobrePage() {
             <p>
               O Barbómetro nasceu da paixão por descobrir e partilhar os melhores restaurantes em Portugal. Como um
               barbudo apaixonado por gastronomia, decidi criar uma plataforma que ajudasse outros a encontrar
-              experiências culinárias autênticas e memoráveis.
+              experiências culinárias autênticas e memoráveis. Aqui encontrarás uma seleção de restaurantes espalhados
+              pelo mundo - desde os mais tradicionais até os mais inovadores.
             </p>
             <p>
               Cada restaurante listado no Barbómetro foi cuidadosamente selecionado e avaliado, com foco na qualidade da
               comida, ambiente, atendimento e relação qualidade-preço. O "Rating Barbudo" representa a minha avaliação
-              pessoal, baseada na experiência completa.
+              pessoal, baseada na experiência completa - comida, preço/qualidade e serviço.
             </p>
             <p>
-              Este projeto é uma forma de celebrar a rica tradição gastronómica portuguesa e ajudar tanto locais como
-              visitantes a descobrirem joias culinárias por todo o país.
+              Este projeto é uma forma de celebrar a rica tradição gastronómica e cultural dos vários países e ajudar 
+              tanto locais como visitantes a descobrirem joias culinárias por todo o mundo - com especial enfase em 
+              Portugal e na Europa.
             </p>
           </CardContent>
         </Card>
@@ -56,7 +58,7 @@ export default function SobrePage() {
         <div className="text-center">
           <p className="text-lg mb-4">Se gostou do Barbómetro e quer apoiar o projeto, considere comprar-me um café!</p>
           <div className="flex justify-center">
-            <BuyMeCoffee username="barbudodev" />
+            <BuyMeCoffee />
           </div>
         </div>
       </div>
