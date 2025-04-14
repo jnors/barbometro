@@ -34,7 +34,8 @@ export function RestaurantExplorer() {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [searchTerm, setSearchTerm] = useState("")
-  const [selectedLocation, setSelectedLocation] = useState("all")
+  const [selectedLocation, setSelectedLocation] = useState<string>()
+  const [selectedLocations, setSelectedLocations] = useState<string[]>([])
   const [selectedCuisines, setSelectedCuisines] = useState<string[]>(["all"])
   const [selectedRestaurant, setSelectedRestaurant] = useState<Restaurant | null>(null)
   const [visitedFilter, setVisitedFilter] = useState<string>("all") // "all", "visited", "not-visited"
@@ -98,8 +99,12 @@ export function RestaurantExplorer() {
     }
 
     // Filter by location
-    if (selectedLocation !== "all") {
-      results = results.filter((restaurant) => restaurant.localidade.toLowerCase() === selectedLocation.toLowerCase())
+    if (selectedLocations.length > 0) {
+      results = results.filter((restaurant) =>
+        selectedLocations.some((location) => 
+          restaurant.localidade.toLowerCase() === location.toLowerCase()
+        )
+      );
     }
 
     // Filter by cuisines (multiple selection)
@@ -158,7 +163,7 @@ export function RestaurantExplorer() {
     setFilteredRestaurants(results)
   }, [
     searchTerm,
-    selectedLocation,
+    selectedLocations,
     selectedCuisines,
     visitedFilter,
     priceFilter,
@@ -171,8 +176,13 @@ export function RestaurantExplorer() {
     setSearchTerm(term)
   }
 
-  const handleLocationFilter = (location: string) => {
-    setSelectedLocation(location)
+  const handleLocationFilter = (locations: string[]) => {
+    // If locations includes "all", clear the selection
+    if (locations.includes("all")) {
+      setSelectedLocations([]);
+    } else {
+      setSelectedLocations(locations);
+    }
   }
 
   const handleCuisineFilter = (cuisines: string[]) => {

@@ -15,7 +15,7 @@ import { Card, CardContent } from "@/components/ui/card"
 
 interface SearchFiltersProps {
   onSearch: (term: string) => void
-  onLocationFilter: (location: string) => void
+  onLocationFilter: (locations: string[]) => void
   onCuisineFilter: (cuisines: string[]) => void
   onVisitedFilter: (status: string) => void
   onPriceFilter: (priceRange: string) => void
@@ -36,10 +36,12 @@ export function SearchFilters({
   locations,
   cuisines,
 }: SearchFiltersProps) {
-  const [selectedCuisines, setSelectedCuisines] = useState<string[]>([])
-  const [selectedPriceRange, setSelectedPriceRange] = useState<string>("all")
-  const [selectedBarbudoRating, setSelectedBarbudoRating] = useState<number | null>(null)
-  const [selectedSort, setSelectedSort] = useState<string>("name")
+  const [selectedCuisines, setSelectedCuisines] = useState<string[]>([]);
+  const [selectedPriceRange, setSelectedPriceRange] = useState<string>("all");
+  const [selectedBarbudoRating, setSelectedBarbudoRating] = useState<number | null>(null);
+  const [selectedSort, setSelectedSort] = useState<string>("name");
+  const [locationSearch, setLocationSearch] = useState("");
+  const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
 
   const handleCuisineChange = (cuisine: string, checked: boolean) => {
     let newSelectedCuisines: string[]
@@ -69,6 +71,10 @@ export function SearchFilters({
     onBarbudoRatingFilter(value)
   }
 
+  const filteredLocations = locations.filter((location) =>
+  location.toLowerCase().includes(locationSearch.toLowerCase())
+);
+
   const handleSortChange = (value: string) => {
     setSelectedSort(value)
     onSortChange(value) // Pass the selected sort option to the parent component
@@ -91,19 +97,79 @@ export function SearchFilters({
           {/* Location filter */}
           <div className="w-full">
             <label className="text-sm font-bold text-secondary mb-2 block">Localidade</label>
-            <Select onValueChange={onLocationFilter} defaultValue="all">
-              <SelectTrigger className="w-full border-primary/30 text-primary bg-secondary hover:bg-secondary/70 hover:text-primary-foreground">
-                <SelectValue placeholder="Localidade" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">Todas as localidades</SelectItem>
-                {locations.map((location) => (
-                  <SelectItem key={location} value={location.toLowerCase()}>
-                    {location}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="w-full justify-between text-primary border-primary/30 bg-secondary hover:bg-secondary/70"
+                >
+                  <span className="truncate">
+                    {selectedLocations.length > 0
+                      ? `${selectedLocations.length} localidade${selectedLocations.length > 1 ? "s" : ""} selecionada${selectedLocations.length > 1 ? "s" : ""}`
+                      : "Localidades"}
+                  </span>
+                  {selectedLocations.length > 0 && (
+                    <Badge variant="secondary" className="ml-2 rounded-full px-1 font-normal">
+                      {selectedLocations.length}
+                    </Badge>
+                  )}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-[300px] p-0" align="start">
+                <div className="p-2 flex justify-between items-center border-b">
+                  <span className="text-sm font-medium">Localidades</span>
+                  {selectedLocations.length > 0 && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-8 px-2 text-xs hover:bg-secondary/70"
+                      onClick={() => {
+                        setSelectedLocations([]);
+                        onLocationFilter(["all"]);
+                        setLocationSearch("");
+                      }}
+                    >
+                      <X className="h-3 w-3 mr-1" />
+                      Limpar
+                    </Button>
+                  )}
+                </div>
+                <div className="p-2">
+                  <Input
+                    placeholder="Pesquisar localidade..."
+                    value={locationSearch}
+                    onChange={(e) => setLocationSearch(e.target.value)}
+                    className="mb-2 border-primary/30"
+                  />
+                  <div className="max-h-[300px] overflow-auto">
+                    {filteredLocations.map((location) => (
+                      <div key={location} className="flex items-center space-x-2 py-1">
+                        <Checkbox
+                          id={`location-${location}`}
+                          checked={selectedLocations.includes(location)}
+                          onCheckedChange={(checked) => {
+                            const newLocations = checked
+                              ? [...selectedLocations, location]
+                              : selectedLocations.filter(l => l !== location);
+                            setSelectedLocations(newLocations);
+                            onLocationFilter(newLocations.length > 0 ? newLocations : ["all"]);
+                          }}
+                        />
+                        <Label
+                          htmlFor={`location-${location}`}
+                          className={cn(
+                            "text-sm cursor-pointer",
+                            selectedLocations.includes(location) && "font-medium"
+                          )}
+                        >
+                          {location}
+                        </Label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </PopoverContent>
+            </Popover>
           </div>
 
           {/* Multi-select Cuisine filter */}
