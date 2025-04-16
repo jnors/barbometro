@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react"
 import type { Restaurant } from "@/types/restaurant"
-import '@types/google.maps'
 import { Card } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Button } from "@/components/ui/button"
