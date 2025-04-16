@@ -1,22 +1,10 @@
-import path from 'path';
+import path from 'path'
 import { fileURLToPath } from 'url';
 
 // Get the directory name of the current module
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 let userConfig = undefined;
-try {
-  // try to import ESM first
-  userConfig = await import('./v0-user-next.config.mjs');
-} catch (e) {
-  try {
-    // fallback to CJS import
-    userConfig = await import('./v0-user-next.config');
-  } catch (innerError) {
-    // ignore error
-  }
-}
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {

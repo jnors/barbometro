@@ -14,6 +14,7 @@ export function Navbar() {
   // Navigation items
   const navItems = [
     { label: "Home", href: "/" },
+    { label: "Guias", href: "/guias" },
     { label: "Sobre", href: "/sobre" },
     {
       label: "Feedback/Bug",

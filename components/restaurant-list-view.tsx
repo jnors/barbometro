@@ -17,7 +17,7 @@ export function RestaurantListView({ restaurants, isLoading }: RestaurantListVie
 
   return (
     <div className="space-y-4">
-      <Alert variant="warning" className="mb-4">
+      <Alert variant="destructive" className="mb-4">
         <AlertCircle className="h-4 w-4" />
         <AlertTitle>Mapa indisponível</AlertTitle>
         <AlertDescription>O mapa não pôde ser carregado. A visualização em lista está disponível.</AlertDescription>
@@ -32,8 +32,7 @@ export function RestaurantListView({ restaurants, isLoading }: RestaurantListVie
             restaurants={restaurants}
             isLoading={isLoading}
             onSelectRestaurant={setSelectedRestaurant}
-            selectedRestaurant={selectedRestaurant}
-          />
+            selectedRestaurant={selectedRestaurant} sortOption={""}          />
         </CardContent>
       </Card>
     </div>
