@@ -10,12 +10,14 @@ const guides = [
     date: "2025-04-15",
     tags: ["Porto", "Petiscos", "Tascas"],
   },
-  // Add more guides here:
-  // {
-  //   route: "outro-guia",
-  //   title: "Outro Guia",
-  //   ...
-  // },
+  {
+    route: "creta",  // must match the subfolder name
+    title: "Rota de Restaurantes em Creta",
+    excerpt: "Os melhores locais para belas refeições na ilha de Creta.",
+    cover: "/images/guias/creta/cover.jpg",
+    date: "2025-08-25",
+    tags: ["Creta", "Restaurantes"],
+  }
 ]
 
 export default function GuiasPage() {
